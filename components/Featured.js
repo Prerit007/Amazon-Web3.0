@@ -19,7 +19,7 @@ const Featured = () => {
     cardCross: `h-[180px] w-[125px] rounded-3xl absolute bottom-[20px] left-[20px] transition-all duration-300 hover:scale-105 flex  overflow-hidden`,
   };
 
-  return <div>Featured</div>;
+  return <div></div>;
 };
 
 export default Featured;
