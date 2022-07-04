@@ -118,7 +118,7 @@ export const AmazonProvider = ({ children }) => {
     const receipt = await Transaction.wait(4);
     setIsLoading(false);
     setEtherscanLink(
-      `https://rinkeby.etherscan.io/tx${receipt.TransactionHash}`
+      `https://rinkeby.etherscan.io/tx/${receipt.TransactionHash}`
     );
   };
 
