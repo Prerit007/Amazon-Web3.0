@@ -58,7 +58,7 @@ const Header = () => {
             {balance}
             <FaCoins className={styles.coins} />
             <Modal isopen={isModalOpen} transition={ModalTransition.SCALE}>
-              {<BuyModal close={closeModal} buyTokens={buyTokens} />}
+              {<BuyModal close={closeModal} />}
             </Modal>
           </div>
         ) : (
@@ -68,7 +68,7 @@ const Header = () => {
           >
             0 AC <FaCoins className={styles.coins} />
             <Modal isopen={isModalOpen} transition={ModalTransition.SCALE}>
-              {<BuyModal close={closeModal} buyTokens={buyTokens} />}
+              {<BuyModal close={closeModal} />}
             </Modal>
           </div>
         )}
