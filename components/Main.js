@@ -12,7 +12,6 @@ const Main = () => {
   return (
     <div className={styles.container}>
       <Header />
-      <Featured />
       <Cards />
     </div>
   );

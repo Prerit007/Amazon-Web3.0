@@ -28,7 +28,54 @@ const Header = () => {
   const { balance, buyTokens, getBalance } = useContext(AmazonContext);
   const { openModal, isModalOpen, closeModal } = useModal();
 
-  return <div>Header</div>;
+  return (
+    <div className={styles.container}>
+      <div className={styles.logo}>
+        <Image
+          src={logo}
+          alt="Logo"
+          className="object-cover"
+          width={100}
+          height={100}
+        />
+      </div>
+      <div className={styles.search}>
+        <input
+          type="search"
+          placeholder="Search..."
+          className={styles.searchInput}
+        />
+        <IoMdSearch fontSize={20} />
+      </div>
+      <div className={styles.menu}>
+        <div className={styles.menuItem}>New Releases</div>
+        <div className={styles.menuItem}>Featured</div>
+        {balance ? (
+          <div
+            className={(styles.balance, styles.menuItem)}
+            onClick={openModal}
+          >
+            {balance}
+            <FaCoins className={styles.coins} />
+            <Modal isopen={isModalOpen} transition={ModalTransition.SCALE}>
+              {<BuyModal close={closeModal} buyTokens={buyTokens} />}
+            </Modal>
+          </div>
+        ) : (
+          <div
+            className={(styles.balance, styles.menuItem)}
+            onClick={openModal}
+          >
+            0 AC <FaCoins className={styles.coins} />
+            <Modal isopen={isModalOpen} transition={ModalTransition.SCALE}>
+              {<BuyModal close={closeModal} buyTokens={buyTokens} />}
+            </Modal>
+          </div>
+        )}
+        <CgMenuGridO fontSize={30} className={styles.menuItem} />
+      </div>
+    </div>
+  );
 };
 
 export default Header;
