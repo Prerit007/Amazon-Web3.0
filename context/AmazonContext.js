@@ -28,5 +28,52 @@ export const AmazonProvider = ({ children }) => {
     isWeb3Enabled,
   } = useMoralis();
 
-  return <AmazonContext.Provider value={{}}>{children}</AmazonContext.Provider>;
+  const {
+    data: userData,
+    error: userDataError,
+    isLoading: userDataIsLoading,
+  } = useMoralisQuery("_User");
+
+  const {
+    data: assetsData,
+    error: assetsDataError,
+    isLoading: assetsDataIsLoading,
+  } = useMoralisQuery("Assets");
+
+  useEffect(() => {
+    (async () => {
+      if (isAuthenticated) {
+        const currentUsername = await user?.get("nickname");
+        setUsername(currentUsername);
+      }
+    })();
+  }, [isAuthenticated, user, username]);
+
+  const handleSetUsername = () => {
+    if (user) {
+      if (nickname) {
+        user.set("nickname", nickname);
+        user.save();
+        setNickname("");
+      } else {
+        console.log("Can't Set Empty Nickname");
+      }
+    } else {
+      console.log("No User");
+    }
+  };
+
+  return (
+    <AmazonContext.Provider
+      value={{
+        isAuthenticated,
+        nickname,
+        setNickname,
+        username,
+        handleSetUsername,
+      }}
+    >
+      {children}
+    </AmazonContext.Provider>
+  );
 };
