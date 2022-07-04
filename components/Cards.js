@@ -10,6 +10,7 @@ const Cards = () => {
   };
   const { assets } = useContext(AmazonContext);
 
+  console.log(assets);
   return (
     <div className={styles.container}>
       <div className={styles.title}>New Release</div>
