@@ -3,8 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
 import { AmazonContext } from "../context/AmazonContext";
-
-const Transaction = () => {
+const Transaction = ({ item }) => {
   const styles = {
     container: ` w-[40%] flex flex-col border-[#d6d7d9] border-2 rounded-lg shadow-lg`,
     top: `flex w-full h-[80px] bg-[#f0f1f3] p-[20px] pr-[80px] gap-[80px]`,
@@ -20,7 +19,58 @@ const Transaction = () => {
   };
 
   const { username } = useContext(AmazonContext);
-  return <div>Transaction</div>;
+
+  return (
+    <>
+      {item.map((asset, index) => {
+        return (
+          <div className={styles.container} key={index}>
+            <div className={styles.top}>
+              <div className="flex w-full gap-[80px]">
+                <div className={styles.topHeaderText}>
+                  ORDER PLACED <br />
+                  {moment(asset.purchaseDate).format("MMMM Do YYYY")}
+                </div>
+                <div className={styles.topHeaderText}>
+                  TOTAL <br />
+                  {asset.price} AC
+                </div>
+                <div className={styles.topHeaderText}>
+                  SHIP TO <br />
+                  {username}
+                </div>
+              </div>
+            </div>
+            <div className={styles.content}>
+              <div className={styles.date}>
+                Bought on {moment(asset.purchaseDate).format("MMMM Do")}
+              </div>
+              <div className={styles.item}>
+                <Image
+                  className="object-cover"
+                  src={asset.src}
+                  alt="item"
+                  height={100}
+                  width={100}
+                />
+                <div className={styles.nameContainer}>
+                  <div className={styles.itemName}>{asset.name}</div>
+                  <div className="flex flex-row items-center justify-center gap-4">
+                    <div className={styles.buyAgainBtn}>Buy it Again</div>
+                    <Link href={`${asset.etherscanLink}`}>
+                      <a target="_blank" rel="noopener">
+                        <div className={styles.etherscanBtn}>Etherscan</div>
+                      </a>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </>
+  );
 };
 
 export default Transaction;
