@@ -4,7 +4,7 @@ import { AmazonContext } from "../context/AmazonContext";
 import { HashLoader } from "react-spinners";
 import Link from "next/link";
 
-const BuyModal = ({ close }) => {
+const BuyModal = ({ close, buyTokens }) => {
   const styles = {
     container: `h-full w-full flex flex-col `,
     closeX: `w-full h-[50px] flex items-center justify-end mb-[20px]`,
@@ -19,7 +19,6 @@ const BuyModal = ({ close }) => {
     etherscan: `w-full h-full flex items-center justify-center text-green-500 text-2xl mt-[20px] font-bold cursor-pointer`,
     success: `w-full h-full flex items-center justify-center text-xl mt-[20px] font-bolder`,
   };
-
   const {
     amountDue,
     setAmountDue,
@@ -29,9 +28,7 @@ const BuyModal = ({ close }) => {
     setIsLoading,
     etherscanLink,
     setEtherscanLink,
-    buyTokens,
   } = useContext(AmazonContext);
-
   useEffect(() => {
     calculatePrice();
   }, [tokenAmount]);
@@ -41,6 +38,7 @@ const BuyModal = ({ close }) => {
     price = price.toFixed(4);
     setAmountDue(price);
   };
+
   return (
     <div className={styles.container}>
       {isLoading ? (
@@ -63,9 +61,9 @@ const BuyModal = ({ close }) => {
               className="cursor-pointer"
             />
           </div>
-          <div className={styles.title}>Buy More Amazon Coins!</div>
+          <div className={styles.title}>Buy More Amazon Coins Here!</div>
           <div className={styles.content}>
-            Select how many Amazon Coins you want to buy
+            Select how many tokens you would like to buy.
           </div>
           <div className={styles.input}>
             <input
@@ -77,7 +75,7 @@ const BuyModal = ({ close }) => {
             />
           </div>
           <div className={styles.price}>
-            Total Due: {""}
+            Total Due:{" "}
             {tokenAmount && tokenAmount > 0 ? amountDue + "ETH" : "0 ETH"}
           </div>
           <button
@@ -93,13 +91,14 @@ const BuyModal = ({ close }) => {
           {etherscanLink && (
             <>
               <div className={styles.success}>
-                Transaction Successful ! Check your transaction receipt
+                Transaction Sucessful! Check out your receipt for your
+                transaction below!
               </div>
-              <link href={`${etherscanLink}`} className={styles.etherscan}>
+              <Link href={`${etherscanLink}`} className={styles.etherscan}>
                 <a className={styles.etherscan} target="_blank">
                   Transaction Receipt
                 </a>
-              </link>
+              </Link>
             </>
           )}
         </>
