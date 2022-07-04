@@ -10,6 +10,7 @@ import { BsFillPersonFill } from "react-icons/bs";
 import Link from "next/link";
 const isAuthenticated = true;
 const username = "";
+const nickname = "";
 const Sidebar = () => {
   const styles = {
     container: `h-full w-[300px] flex flex-col bg-[#fff] static`,
@@ -47,7 +48,7 @@ const Sidebar = () => {
                     type="text"
                     placeholder="Username..."
                     className={styles.usernameInput}
-                    //value={nickname}
+                    value={nickname}
                     //onChange={e => setNickname(e.target.value)}
                   />
                 </div>
@@ -66,8 +67,51 @@ const Sidebar = () => {
             )}
           </>
         )}
+        <div className={styles.connectButton}>
+          <ConnectButton />
+        </div>
       </div>
-      <ConnectButton />
+      <div className={styles.menu}>
+        <Link href="/">
+          <div className={styles.menuItem}>
+            <Image
+              src={logo}
+              alt="Logo"
+              className={styles.amazonLogo}
+              width={30}
+              height={30}
+            />
+            My Amazon <br /> Board
+          </div>
+        </Link>
+        <div className={styles.menuItem}>
+          <FaBox />
+          Collections
+        </div>
+        <div className={styles.menuItem}>
+          <BsFillBookmarkFill />
+          Saved
+        </div>
+        <div className={styles.menuItem}>
+          <BsFillPersonFill />
+          Profile
+        </div>
+        <Link href="/history" target="_blank">
+          <div className={styles.menuItem}>
+            <AiOutlineHistory />
+            Transaction History
+          </div>
+        </Link>
+      </div>
+      <div className={styles.companyName}>
+        <Image
+          src={logoFull}
+          alt="Full-Logo"
+          className={styles.companyName}
+          height={100}
+          width={100}
+        />
+      </div>
     </div>
   );
 };
