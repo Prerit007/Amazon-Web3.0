@@ -1,9 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { AmazonContext } from "../context/AmazonContext";
-
-import Cards from "./Cards";
-import Featured from "./Featured";
-import Header from "./Header";
+import { Header, Featured, Cards } from "../components";
 
 const Main = () => {
   const styles = {
